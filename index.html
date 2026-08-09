@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sammantha &amp; Enrique — 14 Meses</title>
+<meta name="description" content="Un rincón interactivo para celebrar cada segundo juntos.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="cosito.svg">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= CURSOR / AMBIENT LAYER ================= -->
+<canvas id="stars-canvas"></canvas>
+
+<div class="planet" aria-hidden="true">
+  <span class="planet-ring planet-ring-back"></span>
+  <span class="planet-sphere"></span>
+  <span class="moon-orbit mo1"><span class="moon"></span></span>
+  <span class="moon-orbit mo2"><span class="moon m2"></span></span>
+  <span class="moon-orbit mo3"><span class="moon m3"></span></span>
+  <span class="planet-ring planet-ring-front"></span>
+</div>
+
+<div class="venus" aria-hidden="true"></div>
+<div class="float-star fs1" aria-hidden="true">&#10022;</div>
+<div class="float-star fs2" aria-hidden="true">&#10022;</div>
+<div class="float-star fs3" aria-hidden="true">&#10022;</div>
+<div class="float-star fs4" aria-hidden="true">&#10022;</div>
+<div class="float-star fs5" aria-hidden="true">&#10022;</div>
+<div class="float-star fs6" aria-hidden="true">&#10022;</div>
+<div class="float-star fs7" aria-hidden="true">&#10022;</div>
+<div class="float-star fs8" aria-hidden="true">&#10022;</div>
+<div class="float-star fs9" aria-hidden="true">&#10022;</div>
+<div class="float-star fs10" aria-hidden="true">&#10022;</div>
+<div class="float-star fs11" aria-hidden="true">&#10022;</div>
+<div class="float-star fs12" aria-hidden="true">&#10022;</div>
+
+<!-- ================= NAV ================= -->
+<nav class="nav" aria-label="Navegación principal">
+  <span class="nav-brand">S<span class="nav-dot">&amp;</span>E</span>
+  <div class="nav-links">
+    <button class="nav-link active" data-view="inicio" data-i18n="nav.inicio">Inicio</button>
+    <button class="nav-link" data-view="contador" data-i18n="nav.contador">Contador</button>
+    <button class="nav-link" data-view="cronograma" data-i18n="nav.cronograma">Cronograma</button>
+    <button class="nav-link" data-view="camino" data-i18n="nav.camino">Camino</button>
+  </div>
+  <div class="lang-switch" role="group" aria-label="Idioma">
+    <button class="lang-btn" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="pt">PT</button>
+    <button class="lang-btn" data-lang="es">ES</button>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main id="app">
+
+  <!-- ================= VISTA: INICIO (HERO) ================= -->
+  <section class="view view-inicio active" id="inicio" data-view="inicio">
+    <div class="hero-frame">
+      <p class="eyebrow reveal-up" data-i18n="hero.eyebrow">catorce meses de</p>
+      <h1 class="hero-title">
+        <span class="reveal-up d1" data-i18n="hero.title1">Nuestro</span>
+        <span class="reveal-up d2" data-i18n="hero.title2">Pequeño</span>
+        <span class="reveal-up d3" data-i18n="hero.title3">Infinito</span>
+      </h1>
+      <p class="hero-sub reveal-up d4" data-i18n="hero.sub">Desde el 11 de noviembre de 2025, Al lado del amor de mi vida.</p>
+
+      <div class="hero-live reveal-up d5" id="heroLive" aria-live="polite">
+        <span class="hero-live-num" id="heroDays">0</span>
+        <span class="hero-live-label" data-i18n="hero.liveLabel">días juntos, y contando</span>
+      </div>
+
+      <div class="hero-actions reveal-up d6">
+        <button class="btn btn-primary" data-goto="contador" data-i18n="hero.btnCounter">Nuestro Tiempo Juntos</button>
+        <button class="btn btn-ghost" data-goto="camino" data-i18n="hero.btnPath">Recorrer nuestro camino</button>
+      </div>
+
+      <div class="hero-sign">
+        <span class="hero-sign-mark">&ldquo;</span>
+        <p data-i18n="hero.sign">Escribe aquí una introducción o el inicio de una carta para ella. Cambia este texto en script.js, clave "hero.sign".</p>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint reveal-up d7">
+      <span data-i18n="hero.scrollHint">hay más</span>
+      <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><path d="M8 1v18M2 13l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </section>
+
+  <!-- ================= VISTA: CONTADOR ================= -->
+  <section class="view view-contador" id="contador" data-view="contador">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="counter.eyebrow">tiempo real</p>
+      <h2 data-i18n="counter.title">Cada unidad, contando</h2>
+      <p class="section-sub" data-i18n="counter.sub">Desde el 11 de noviembre de 2025, 00:00 — sin pausas, sin ceros a la izquierda que perdonen.</p>
+    </div>
+
+    <div class="counter-grid" id="counterGrid">
+      <div class="counter-cell" data-unit="years">
+        <span class="counter-num" data-target="years">0</span>
+        <span class="counter-label" data-i18n="counter.years">años</span>
+      </div>
+      <div class="counter-cell" data-unit="months">
+        <span class="counter-num" data-target="months">0</span>
+        <span class="counter-label" data-i18n="counter.months">meses</span>
+      </div>
+      <div class="counter-cell" data-unit="days">
+        <span class="counter-num" data-target="days">0</span>
+        <span class="counter-label" data-i18n="counter.days">días</span>
+      </div>
+      <div class="counter-cell" data-unit="hours">
+        <span class="counter-num" data-target="hours">00</span>
+        <span class="counter-label" data-i18n="counter.hours">horas</span>
+      </div>
+      <div class="counter-cell" data-unit="minutes">
+        <span class="counter-num" data-target="minutes">00</span>
+        <span class="counter-label" data-i18n="counter.minutes">min</span>
+      </div>
+      <div class="counter-cell counter-cell-seconds" data-unit="seconds">
+        <span class="counter-num" data-target="seconds">00</span>
+        <span class="counter-label" data-i18n="counter.seconds">seg</span>
+      </div>
+    </div>
+
+    <p class="counter-footnote" data-i18n="counter.footnote">Esto no se detiene. Vuelve mañana, en un año, y el número va a ser más grande.</p>
+  </section>
+
+  <!-- ================= VISTA: CRONOGRAMA ================= -->
+  <section class="view view-cronograma" id="cronograma" data-view="cronograma">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="timeline.eyebrow">la línea</p>
+      <h2 data-i18n="timeline.title">Cronograma nuestro</h2>
+      <p class="section-sub" data-i18n="timeline.sub">Los puntos que unen el 11 de noviembre de 2025 con hoy. Edita las fechas y textos en <code>script.js</code>.</p>
+    </div>
+
+    <div class="timeline" id="timeline"><!-- generado por JS --></div>
+  </section>
+
+  <!-- ================= VISTA: CAMINO (9 CARTAS) ================= -->
+  <section class="view view-camino" id="camino" data-view="camino">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="path.eyebrow">nueve paradas</p>
+      <h2 data-i18n="path.title">Nuestro camino</h2>
+      <p class="section-sub" data-i18n="path.sub">Toca cada estrella. Reemplaza fotos y textos en <code>script.js</code> para hacerlo suyo.</p>
+    </div>
+
+    <div class="path-wrap">
+      <svg class="path-svg" id="pathSvg" viewBox="0 0 1000 1400" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
+        <path id="pathLine" d="" fill="none" stroke="url(#pathGrad)" stroke-width="3" stroke-dasharray="2 14" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="pathGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#D8B25C"/>
+            <stop offset="100%" stop-color="#F2A6B3"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="path-nodes" id="pathNodes"><!-- generado por JS --></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= MODAL: TARJETA DEL CAMINO ================= -->
+<div class="card-modal" id="cardModal" aria-hidden="true">
+  <div class="card-modal-backdrop" id="cardModalBackdrop"></div>
+  <div class="card-modal-panel" role="dialog" aria-modal="true" aria-labelledby="cardModalTitle">
+    <button class="card-modal-close" id="cardModalClose" aria-label="Cerrar" data-i18n-aria="modal.close">&times;</button>
+    <span class="card-modal-seal">&#9993;</span>
+    <p class="card-modal-eyebrow" id="cardModalEyebrow"></p>
+    <h3 id="cardModalTitle"></h3>
+    <p id="cardModalText"></p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
